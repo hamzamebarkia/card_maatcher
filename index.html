@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>Greed Island: The Cards Matcher</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Greed Island : The Cards Matcher</h1>
+            <p class="subtitle">A Hunter's Memory Game</p>
+        </header>
+
+        <div id="score-panel-container"></div>
+        
+        <main>
+            <div id="card-grid-container"></div>
+        </main>
+
+        <div id="modal-overlay" class="hidden">
+            <div class="modal-content">
+                <h2 id="modal-title">Game Over</h2>
+                <p id="modal-desc">You ran out of time.</p>
+                <button id="restart-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="algorithm/probabilityEngine.js"></script>
+    <script src="algorithm/patternDetector.js"></script>
+    <script src="algorithm/interferenceManager.js"></script>
+    <script src="components/ScorePanel.js"></script>
+    <script src="components/ProbabilityOverlay.js"></script>
+    <script src="components/CardGrid.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
