@@ -17,6 +17,15 @@ class PatternDetector {
         if (col > 0) adjacent.push(index - 1);
         // Right
         if (col < this.cols - 1) adjacent.push(index + 1);
+        
+        // Top-Left
+        if (row > 0 && col > 0) adjacent.push(index - this.cols - 1);
+        // Top-Right
+        if (row > 0 && col < this.cols - 1) adjacent.push(index - this.cols + 1);
+        // Bottom-Left
+        if (row < this.rows - 1 && col > 0) adjacent.push(index + this.cols - 1);
+        // Bottom-Right
+        if (row < this.rows - 1 && col < this.cols - 1) adjacent.push(index + this.cols + 1);
 
         return adjacent;
     }

@@ -25,18 +25,25 @@ class ProbabilityEngine {
         unrevealedCards.forEach(card => {
             let prob = baseProb;
             
-            // Adjacency bonus: "adjacent cards are 20% more likely to match"
-            if (this.patternDetector.isAdjacent(flippedCardIndex, card.index)) {
-                prob += 20;
-            }
-
-            // Symbol frequency/rarity distortion (Hisoka's trick)
+            // 1. Symbol frequency/rarity distortion applies to the base probability first
             const weight = this.symbolWeights[flippedCard.symbol] || 1;
             prob = prob * weight;
             
-            // Add a slight random noise to simulate Bungee Gum stretching truth
+            // 2. Adjacency bonus: "adjacent cards are 20% more likely to match"
+            // We add this AFTER rarity so that the 20% flat boost isn't scaled down by rare weights
+            let isAdj = this.patternDetector.isAdjacent(flippedCardIndex, card.index);
+            if (isAdj) {
+                prob += 20;
+            }
+
+            // 3. Add a slight random noise to simulate Bungee Gum stretching truth
             const noise = (Math.random() * 10) - 5; // -5% to +5%
             prob += noise;
+
+            // 4. Enforce strict minimums so adjacent cards always look appropriately high
+            if (isAdj) {
+                prob = Math.max(20, prob); // Ensure adjacent cards never drop below 20%
+            }
 
             // Clamp between 0 and 100
             prob = Math.max(1, Math.min(99, prob));
